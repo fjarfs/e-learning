@@ -1,5 +1,10 @@
 <?php
 
+require('helpers/function.php');
+
+accessLog();
+set_error_handler('myErrorHandler');
+
 session_start();
 if (isset($_GET['lang'])) {
     $_SESSION['lang'] = $_GET['lang'];
@@ -7,6 +12,8 @@ if (isset($_GET['lang'])) {
     $_SESSION['lang'] = 'en';
 }
 
-$lang = require('lang/config.php');
-set_error_handler('myErrorHandler');
-return require('views/index.php');
+$template = 1;
+$assets = "assets/" . $template;
+
+
+return require(__DIR__ . '/views/templates/' . $template . '/' . $template . '.php');
